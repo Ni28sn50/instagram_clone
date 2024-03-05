@@ -1,0 +1,30 @@
+{% load static %}
+
+<div class="head">
+    <div class="a">
+        {% if user.picture %}
+        <img class="profile_img" src="{{ user.picture.url }}" alt="">
+        {% else %}
+        <img class="profile_img" src="{% static 'images/home_images/profile.svg' %}" alt="User_image">
+        {% endif %}
+        <img class="add" src="{% static 'images/profile_images/add.png' %}" alt="">
+    </div>
+    <div class="b">
+        <div class="c">
+            <p>{{request.user.username}}</p>
+            <a href="{% url 'profile_edit_view' request.user.username %}"><button>Edit Profile</button></a>
+            <button>View archive</button>
+            <img src="{% static 'images/profile_images/settings.png' %}" alt="">
+        </div>
+
+        <div class="d"> 
+            <p><strong>{{ request.user.post_set.count }}</strong> posts</p>       <!-- Number of posts posted by the user -->
+            <!-- created property in 'User' table which reverse accesses the 'Follower' table and gets the 'current users' followers and followings -->
+            <p><strong>{{ request.user.follower_count  }}</strong> followers</p>
+            <p><strong>{{ request.user.following_count }}</strong> following</p>
+        </div>
+        <div class="e">
+            <h5>{{user.full_name}}</h5>
+        </div>
+    </div>  
+</div>

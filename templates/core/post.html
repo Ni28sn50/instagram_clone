@@ -1,0 +1,56 @@
+{% load static %}
+{% load humanize %}
+
+{% for post in all_posts %}
+  <div class="post">
+    <div class="a">
+      <div class="icon">
+        {% if post.user.picture %}
+          <img src="{{ post.user.picture.url }}" alt="">
+        {% else %}
+          <img src="{% static 'images/home_images/profile.svg' %}" alt="..">
+        {% endif %}
+      </div>
+      <a href="{% url 'profile_view' post.user.username %}" style="text-decoration: none; font-family: sans-serif; font-weight: bold; color: black;">
+        <div class="name">{{ post.user.username }}</div>
+      </a>
+      <p style="padding: 0; margin: 0; font-family: sans-serif; font-size: 15px;">{{ post.posted_on|naturaltime }}</p>
+      <img src="{% static 'images/home_images/moreoptions.png' %}" alt="">
+    </div>
+    <div class="b" >
+      <img src="{{ post.image.url }}" alt="">   <!-- accessing media image -->
+    </div>
+    <div class="c">
+
+      <form method="POST" action="{% url 'post_like_unlike_view' post.pk %}">
+        {% csrf_token %}
+        <button type="submit">
+          {% if request.user in post.liked_users %}   <!-- User has already liked the post, show the unlike button -->
+            <img id="heart_img_{{ post.id }}" src="{% static 'images/home_images/heart-solid.svg' %}" alt="">
+          {% else %}
+            <img id="heart_img_{{ post.id }}" src="{% static 'images/home_images/notification.svg' %}" alt="">
+          {% endif %}
+        </button>
+      </form>
+    <a href="{% url 'comment_page' post.id %}"><img src="{% static 'images/home_images/message.svg' %}" alt=""></a>
+      
+      
+      <img class="bookmark" src="{% static 'images/home_images/bookmark.png' %}" alt="">
+      
+    </div>
+    <div class="d">
+      <p>{{ post.likes_count }} likes</p>
+    </div>
+    <div class="e">
+      <p><span style="font-weight: bold;">{{ post.user.username }}</span> {% if post.text %}{{ post.text }}{% endif %} </p>
+    </div>
+    <a class="comment" href="{% url 'comment_page' post.id %}"><div class="f">View all comments</div></a>
+    <div class="g">
+      <form method="POST" action="{% url 'post_comment_view' post.pk %}">
+        {% csrf_token %}
+        <input type="text" class="comment"  name="comment_text" placeholder="Add a comment...">
+        <button type="submit">Post</button>
+      </form>
+    </div>
+  </div>
+{% endfor %}

@@ -1,0 +1,132 @@
+
+.create_post{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.post_view{
+    border: 1px solid;
+    width: 50vw;
+    height: 50vh;
+    border-radius: 5px;
+    padding: 20px;
+    padding-top: 0;
+    position: absolute;
+    background-color: white;
+    top: -150%;
+    left: auto;
+    margin: auto;
+    opacity: 0;
+    z-index: 100;
+    transition: top 0ms ease-in-out 200ms,
+                opacity 200ms ease-in-out 0ms,
+                transform 20ms ease-in-out 0ms;
+}
+
+.post_view.active1 {
+    top: 20%;
+    opacity: 1;
+    transition: top 0ms ease-in-out 0ms,
+    opacity 200ms ease-in-out 0ms,
+    transform 20ms ease-in-out 0ms;
+}
+
+.post_view > .a{
+    display: flex;
+    align-items: center;
+    gap: 150px;
+}
+.post_view .a .close_btn1{
+    border: none;
+    border-radius: 100%;
+    background-color: lightgray;
+    cursor: pointer;
+    position: absolute;
+    right: 5%;
+}
+
+.post_view form{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.post_view form textarea{
+    height: 25vh;
+    width: 30vw;
+    border-radius: 10px;
+}
+.post_view form .browse{
+    padding: 5px;
+    font-family: sans-serif;
+    background-color: lightgray;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.post_view form .create{
+    border-radius: 10px;
+    cursor: pointer;
+    border: none;
+    padding: 5px;
+    background-color: cornflowerblue;
+    color: white;
+}
+
+
+
+/* Mobile Devices (up to 767px) */
+@media only screen and (max-width: 767px) {
+    .post_view {
+        width: 90vw;
+        height: 70vh;
+        padding: 10px;
+    }
+
+    .post_view > .a {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .post_view .a .close_btn1 {
+        right: auto;
+        top: 5%;
+        left: 5%;
+    }
+
+    .post_view form textarea {
+        width: 100%;
+    }
+
+    .post_view form .browse,
+    .post_view form .create {
+        width: 100%;
+    }
+}
+
+/* Tablets (between 768px and 1023px) */
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+    .post_view {
+        width: 70vw;
+        height: 60vh;
+        padding: 15px;
+    }
+
+    .post_view > .a {
+        gap: 30px;
+    }
+
+    .post_view form textarea {
+        width: 40vw;
+    }
+}
+
+/* Larger Tablets and Desktops (1024px and above) */
+@media only screen and (min-width: 1024px) {
+    .post_view {
+        width: 50vw;
+        height: 50vh;
+    }
+}

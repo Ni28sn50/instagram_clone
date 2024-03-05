@@ -1,0 +1,40 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Log in</title>
+  <link rel="stylesheet" href="{% static 'authentication/loginpage.css' %}">
+  <script src="https://kit.fontawesome.com/cf99b9e475.js" crossorigin="anonymous"></script>   
+</head>
+<body>
+  <div class="container1">
+    <div>
+      <img class="phone" src="{% static 'images/authentication/instagram-monitoring.png'%}" >
+    </div>
+    <div class="main">
+        <div class="page">
+          <div class="title"><img src="{% static 'images/authentication/instagramlogo.png'%}" alt=""></div>
+          <form class="login-form" method="POST">
+            {% csrf_token %}
+            {% if error %} 
+              <p style="color: red; margin: 0; margin-bottom: 10px;">{{error}}</p>
+            {% endif %}
+            <input type="text" placeholder="Email or username" name="email_username">
+            <input type="password" placeholder="Password" name="password">
+            <button type="submit">Log in</button>
+          </form>
+          <div class="option">OR</div>
+          <div class="fblink"><span class="fab fa-facebook"></span><a href="#">Log in with Facebook</a></div>
+          <div class="forget-id"><a href="#">Forgotten your password?</a></div>
+        </div>
+        <div class="sign-up"><p>Don't have an account?<a href="{% url 'signup_view' %}">Sign up</a></p></div>
+        <p>Get the app.</p>
+        <button type="button"><i class="fa-brands fa-apple"></i> App Store</button>    <!-- icon added using font awesome -->
+        <button type="button"><i class="fa-brands fa-google-play"></i> Google Play</button>
+      </div>
+    </div>
+    </body>
+</html>
